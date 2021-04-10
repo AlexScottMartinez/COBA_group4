@@ -2,21 +2,20 @@ package com.example.coba_group4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class SignUp extends AppCompatActivity
-{
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     Button SignUpBtn;
     EditText mName, mUsername, mEmail, mPassword;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -26,36 +25,50 @@ public class SignUp extends AppCompatActivity
         mEmail = findViewById(R.id.reg_email);
         SignUpBtn = findViewById(R.id.sign_up);
 
-        SignUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        SignUpBtn.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_up:
                 String usernameValue = mUsername.getText().toString().trim();
                 String passwordValue = mPassword.getText().toString().trim();
                 String nameValue = mName.getText().toString().trim();
                 String emailValue = mEmail.getText().toString().trim();
 
-                if(TextUtils.isEmpty(nameValue))
-                {
+                if (TextUtils.isEmpty(nameValue)) {
                     mName.setError("Name is required");
                     return;
                 }
-                if(TextUtils.isEmpty(usernameValue))
-                {
+                if (TextUtils.isEmpty(usernameValue)) {
                     mUsername.setError("Username is required");
                     return;
                 }
-                if(TextUtils.isEmpty(emailValue))
-                {
+                if (TextUtils.isEmpty(emailValue)) {
                     mEmail.setError("Email is required");
                     return;
                 }
-                if(TextUtils.isEmpty(passwordValue))
-                {
+                if (TextUtils.isEmpty(passwordValue)) {
                     mPassword.setError("Password is required");
                     return;
                 }
+
+                User user = new User(nameValue, usernameValue, emailValue, passwordValue);
+
+                registerUser(user);
+
+                break;
+        }
+    }
+    private void registerUser(User user){
+        ServerRequests serverRequests = new ServerRequests(this);
+        serverRequests.storeUserDataInBackground(user, new GetUserCallback() {
+            @Override
+            public void done(User returnUser) {
+                startActivity(new Intent(SignUp.this, Login.class));
             }
         });
-
     }
 }
