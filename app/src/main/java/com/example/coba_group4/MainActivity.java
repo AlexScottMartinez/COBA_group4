@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity
 {
+    ListView lv_reportedOccurences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -14,13 +16,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
+        lv_reportedOccurences = findViewById(R.id.lv_reportedOccurrences);
 
     }
-
 }

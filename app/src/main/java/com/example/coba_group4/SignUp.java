@@ -74,6 +74,5 @@ public class SignUp extends AppCompatActivity
                 Toast.makeText(SignUp.this, "Success" + success, Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
