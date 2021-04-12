@@ -3,7 +3,10 @@ package com.example.coba_group4;
 public class User
 {
     private int id;
-    String name, username, email, password;
+    private String name;
+    private String username;
+    private String  email;
+    private String password;
 
     // Constructors
 
@@ -17,6 +20,17 @@ public class User
     }
 
     public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
     // Getters and Setters
 

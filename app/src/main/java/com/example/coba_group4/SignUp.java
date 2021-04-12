@@ -58,20 +58,19 @@ public class SignUp extends AppCompatActivity
                     mPassword.setError("Password is required");
                     return;
                 }
-                User user;
-                try
-                {
-                    user = new User(-1, nameValue, usernameValue, emailValue, passwordValue);
-                    Toast.makeText(SignUp.this, user.toString(), Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e)
-                {
-                    Toast.makeText(SignUp.this, "Error creating account", Toast.LENGTH_SHORT).show();
-                    user = new User(-1, "error", "error", "error", "error");
-                }
-                Database database = new Database(SignUp.this);
-                boolean success = database.addOne(user);
-                Toast.makeText(SignUp.this, "Success" + success, Toast.LENGTH_SHORT).show();
+                    User user;
+                    try
+                    {
+                        user = new User(-1, nameValue, usernameValue, emailValue, passwordValue);
+                        Toast.makeText(SignUp.this, user.toString(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e)
+                    {
+                        Toast.makeText(SignUp.this, "Error creating account", Toast.LENGTH_SHORT).show();
+                        user = new User(-1, "error", "error", "error", "error");
+                    }
+                    Database database = new Database(SignUp.this);
+                    boolean success = database.addOne(user);
+                    Toast.makeText(SignUp.this, "Success" + success, Toast.LENGTH_SHORT).show();
             }
         });
     }
