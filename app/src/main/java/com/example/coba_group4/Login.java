@@ -17,7 +17,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Button loginBtn;
     TextView msignUpLink;
 
-    UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         loginBtn.setOnClickListener(this);
         msignUpLink.setOnClickListener(this);
-        userLocalStore = new UserLocalStore(this);
+
     }
 
     @Override
@@ -49,7 +48,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 String usernameValue = mUsername.getText().toString().trim();
                 String passwordValue = mPassword.getText().toString().trim();
 
-                User user = new User(null, usernameValue, null, passwordValue);
 
                 if(TextUtils.isEmpty(usernameValue))
                 {
@@ -72,39 +70,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(Login.this, "Useranme or Password is not correct", Toast.LENGTH_SHORT).show();
 
                 }
-                authenticate(user);
                 break;
         }
 
     }
-    private void authenticate(User user){
-        ServerRequests serverRequests = new ServerRequests(this);
-        ServerRequests.fetchUserDataInBackground(user, new GetUserCallback() {
-            @Override
-            public void done(User returnUser) {
-                if(returnUser == null){
-                    showErrorMessage();
-                }
-                else{
-                    logUserIn(returnUser);
-                }
-            }
-        });
-    }
 
-    private void showErrorMessage()
-    {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Incorrect user details");
-        dialogBuilder.setPositiveButton("Ok", null);
-        dialogBuilder.show();
-    }
-
-    private void logUserIn(User returnUser)
-    {
-        userLocalStore.storeUserData(returnUser);
-        userLocalStore.setUserLoggedIn(true);
-
-        startActivity(new Intent(this, MainActivity.class));
-    }
 }

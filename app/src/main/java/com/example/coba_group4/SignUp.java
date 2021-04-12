@@ -54,21 +54,19 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     mPassword.setError("Password is required");
                     return;
                 }
-
-                User user = new User(nameValue, usernameValue, emailValue, passwordValue);
-
-                registerUser(user);
+                User user;
+                try
+                {
+                    user = new User(-1, nameValue, usernameValue, emailValue, passwordValue);
+                }
+                catch (Exception e)
+                {
+                    user = new User(-1, "error", "error", "error", "error");
+                }
+                Database database = new Database(SignUp.this);
+                database.addOne(user);
 
                 break;
         }
-    }
-    private void registerUser(User user){
-        ServerRequests serverRequests = new ServerRequests(this);
-        serverRequests.storeUserDataInBackground(user, new GetUserCallback() {
-            @Override
-            public void done(User returnUser) {
-                startActivity(new Intent(SignUp.this, Login.class));
-            }
-        });
     }
 }
