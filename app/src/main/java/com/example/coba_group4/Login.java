@@ -48,7 +48,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 String usernameValue = mUsername.getText().toString().trim();
                 String passwordValue = mPassword.getText().toString().trim();
 
-
                 if(TextUtils.isEmpty(usernameValue))
                 {
                     mUsername.setError("Username is required");
@@ -67,7 +66,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
                 else
                 {
-                    Toast.makeText(Login.this, "Useranme or Password is not correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Username or Password is not correct", Toast.LENGTH_SHORT).show();
 
                 }
                 break;
