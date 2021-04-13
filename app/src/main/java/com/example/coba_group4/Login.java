@@ -16,6 +16,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText mUsername, mPassword;
     Button loginBtn;
     TextView msignUpLink;
+    Database db;
 
 
     @Override
@@ -23,10 +24,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mUsername = findViewById(R.id.username);
-        mPassword = findViewById(R.id.password);
-        loginBtn = findViewById(R.id.login);
-        msignUpLink = findViewById(R.id.signUpLink);
+        mUsername = (EditText) findViewById(R.id.username);
+        mPassword = (EditText) findViewById(R.id.password);
+        loginBtn = (Button) findViewById(R.id.login);
+        msignUpLink = (TextView) findViewById(R.id.signUpLink);
+        db = new Database(this);
 
         loginBtn.setOnClickListener(this);
         msignUpLink.setOnClickListener(this);
@@ -58,16 +60,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     mPassword.setError("Password is required");
                     return;
                 }
-                if(usernameValue.equals("admin") && passwordValue.equals("admin"))
-                {
-                    Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-                }
                 else
                 {
-                    Toast.makeText(Login.this, "Username or Password is not correct", Toast.LENGTH_SHORT).show();
-
+                    Boolean checkUserPassword = db.checkUsernamePassword(usernameValue, passwordValue);
+                    if (checkUserPassword == true)
+                    {
+                        Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    }
+                    else {
+                        Toast.makeText(Login.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), Login.class));
+                    }
                 }
                 break;
         }

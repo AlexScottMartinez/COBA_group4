@@ -15,6 +15,7 @@ public class SignUp extends AppCompatActivity
 
     Button SignUpBtn;
     EditText mName, mUsername, mEmail, mPassword;
+    Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,11 +23,12 @@ public class SignUp extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        mUsername = findViewById(R.id.reg_username);
-        mPassword = findViewById(R.id.reg_password);
-        mName = findViewById(R.id.reg_name);
-        mEmail = findViewById(R.id.reg_email);
-        SignUpBtn = findViewById(R.id.sign_up);
+        mUsername = (EditText) findViewById(R.id.reg_username);
+        mPassword = (EditText) findViewById(R.id.reg_password);
+        mName = (EditText) findViewById(R.id.reg_name);
+        mEmail = (EditText) findViewById(R.id.reg_email);
+        SignUpBtn = (Button) findViewById(R.id.sign_up);
+        db = new Database(this);
 
         SignUpBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -58,19 +60,24 @@ public class SignUp extends AppCompatActivity
                     mPassword.setError("Password is required");
                     return;
                 }
-                    User user;
-                    try
+                else {
+                    Boolean checkUser = db.checkUsername(usernameValue);
+                    if (checkUser == false)
                     {
-                        user = new User(-1, nameValue, usernameValue, emailValue, passwordValue);
-                        Toast.makeText(SignUp.this, user.toString(), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e)
-                    {
-                        Toast.makeText(SignUp.this, "Error creating account", Toast.LENGTH_SHORT).show();
-                        user = new User(-1, "error", "error", "error", "error");
+                        Boolean insert = db.addOne(nameValue,usernameValue, emailValue, passwordValue);
+                        if (insert == true)
+                        {
+                            Toast.makeText(SignUp.this, "Sign up successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), Login.class));
+                        }
+                        else {
+                            Toast.makeText(SignUp.this, "Sign up failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    Database database = new Database(SignUp.this);
-                    boolean success = database.addOne(user);
-                    Toast.makeText(SignUp.this, "Success" + success, Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(SignUp.this, "Username already exists, please chose another one", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
