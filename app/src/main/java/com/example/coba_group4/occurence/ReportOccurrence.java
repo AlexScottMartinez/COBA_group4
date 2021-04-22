@@ -1,40 +1,48 @@
 package com.example.coba_group4.occurence;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 
-import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.text.TextUtils;
+import android.widget.TimePicker;
 
-import com.example.coba_group4.Emergency;
-import com.example.coba_group4.Forum;
-import com.example.coba_group4.ForumMessaging;
 import com.example.coba_group4.MainActivity;
-import com.example.coba_group4.Map;
-import com.example.coba_group4.OccurrenceData;
-import com.example.coba_group4.ProfilePage;
 import com.example.coba_group4.R;
-import com.example.coba_group4.Search;
-import com.example.coba_group4.SignUp;
+import com.example.coba_group4.database.OccurrenceDB;
+import com.example.coba_group4.fragment.DatePickerFragment;
+import com.example.coba_group4.fragment.TimePickerFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class ReportOccurrence extends AppCompatActivity {
+public class ReportOccurrence extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     //Initialize variable
-    DrawerLayout drawerLayout;
-    Spinner eventTypeDropdown;
-    EditText address, date, time, description;
-    OccurrenceEventType eventTypeEnum;
-    final String eventTypeTitle = "Event Type";
+    private  DatePicker dtPicker;
+    private  TimePicker tmPicker;
+    private DrawerLayout drawerLayout;
+    private Spinner eventTypeDropdown;
+    private EditText address, city, state, zipCode, date, time, description;
+    private TextView errorText;
+    private OccurrenceEventType eventTypeEnum;
+    private Button datePickerBtn, timePickerBtn;
+    private final String eventTypeTitle = "Event Type";
+    private String timeString;
+    private OccurrenceDB occurrenceDB = new OccurrenceDB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,108 +63,29 @@ public class ReportOccurrence extends AppCompatActivity {
         date = findViewById(R.id.report_date);
         time = findViewById(R.id.report_time);
         description = findViewById(R.id.report_description);
-    }
+        city = findViewById(R.id.report_city);
+        state = findViewById(R.id.report_state);
+        zipCode = findViewById(R.id.report_zip);
+        errorText = findViewById(R.id.report_error_text);
 
-    public void ClickMenu(View view)
-    {
-        //Open drawer
-        openDrawer(drawerLayout);
-    }
+        datePickerBtn = (Button) findViewById(R.id.report_date_picker);
+        datePickerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
 
-    private static void openDrawer(DrawerLayout drawerLayout)
-    {
-        //Open drawer Layout
-        drawerLayout.openDrawer(GravityCompat.START);
-    }
+        timePickerBtn = findViewById(R.id.report_time_picker);
+        timePickerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
+            }
+        });
 
-    public void ClickLogo(View view)
-    {
-        //Close drawer
-        closeDrawer(drawerLayout);
-    }
-
-    private static void closeDrawer(DrawerLayout drawerLayout)
-    {
-        //Close drawer layout
-        //Check condition
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            //When drawer is open
-            //Close drawer
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
-    }
-
-    public void ClickHomepage(View view)
-    {
-        //Redirect activity to Homepage
-        redirectActivity(this, MainActivity.class);
-    }
-
-    public void ClickReportOccurrence(View view)
-    {
-        //Recreate activity
-        recreate();
-    }
-
-    public void Click911(View view)
-    {
-        //Redirect activity to 911
-        redirectActivity(this, Emergency.class);
-    }
-
-    public void ClickSearch(View view)
-    {
-        //Redirect activity to Search
-        redirectActivity(this, Search.class);
-    }
-
-    public void ClickForum(View view)
-    {
-        //Redirect activity to Forums
-        redirectActivity(this, Forum.class);
-    }
-
-    public void ClickChat(View view)
-    {
-        //redirect activity to Forum Messaging
-        redirectActivity(this, ForumMessaging.class);
-    }
-
-    public void ClickMap(View view)
-    {
-        //Redirect activity to Map
-        redirectActivity(this, Map.class);
-    }
-
-    public void ClickOccurrenceData(View view)
-    {
-        //Redirect activity to Occurrence Data
-        redirectActivity(this, OccurrenceData.class);
-    }
-
-    public void ClickProfilePage(View view)
-    {
-        //Redirect activity to Profile Page
-        redirectActivity(this, ProfilePage.class);
-    }
-
-    private static void redirectActivity(Activity activity, Class aClass)
-    {
-        //Initialize intent
-        Intent intent = new Intent(activity, aClass);
-        //Set flag
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //Start activity
-        activity.startActivity(intent);
-    }
-
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        //Close drawer
-        closeDrawer(drawerLayout);
     }
 
     public void onClick(View v)
@@ -171,14 +100,33 @@ public class ReportOccurrence extends AppCompatActivity {
             case R.id.add_report:
 
                 String addressValue = address.getText().toString().trim();
+                String cityValue = city.getText().toString().trim();
+                String stateValue = state.getText().toString().trim();
+                String zipValue = zipCode.getText().toString().trim();
                 String dateValue = date.getText().toString().trim();
                 String timeValue = time.getText().toString().trim();
                 String descriptionValue = description.getText().toString().trim();
                 String eventTypeValue = (String) eventTypeDropdown.getSelectedItem();
                 boolean error = false;
+
                 if(TextUtils.isEmpty(addressValue))
                 {
                     address.setError("Address is required");
+                    error = true;
+                }
+                if(TextUtils.isEmpty(cityValue))
+                {
+                    city.setError("City is required");
+                    error = true;
+                }
+                if(TextUtils.isEmpty(stateValue))
+                {
+                    state.setError("Address is required");
+                    error = true;
+                }
+                if(TextUtils.isEmpty(zipValue))
+                {
+                    zipCode.setError("Zip Code is required");
                     error = true;
                 }
                 if(TextUtils.isEmpty(dateValue))
@@ -201,11 +149,55 @@ public class ReportOccurrence extends AppCompatActivity {
                     ((TextView)eventTypeDropdown.getSelectedView()).setError("Event Type is required");
                     error = true;
                 }
+                else
+                {
+                    ((TextView)eventTypeDropdown.getSelectedView()).setError(null);
+                }
+
+                Date parsedDate = null;
+                if(!dateValue.equals("") && !timeValue.equals("")) {
+                    try {
+                        parsedDate = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(dateValue + " " + timeString);
+                    } catch (ParseException e) {
+                        date.setError("Date can not be determined.  Please try again.");
+                        error = true;
+                    }
+                }
+
                 if(error)
                 {
                     return;
                 }
+
+
+                Occurrence occurrence = new Occurrence(addressValue, cityValue, stateValue, Integer.parseInt(zipValue), eventTypeValue, parsedDate, descriptionValue);
+                Boolean added = occurrenceDB.addOne(occurrence);
+                if(!added)
+                {
+                    errorText.setText("Error occurred while trying to add Occurrence.");
+                    return;
+                }
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        date.setText(month+"/"+dayOfMonth+"/"+year);
+        date.setError(null);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        String end = "AM";
+        String min = minute < 10? "0"+minute: minute+"";
+        timeString = hourOfDay+":"+min;
+        if(hourOfDay > 12)
+        {
+            hourOfDay -= 12;
+            end = "PM";
+        }
+        time.setText(hourOfDay+":"+min+end);
+        time.setError(null);
     }
 }

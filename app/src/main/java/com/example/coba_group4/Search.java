@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.coba_group4.occurence.OccurrenceData;
 import com.example.coba_group4.occurence.ReportOccurrence;
 
 public class Search extends AppCompatActivity

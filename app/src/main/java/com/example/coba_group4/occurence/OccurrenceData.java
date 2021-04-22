@@ -1,4 +1,4 @@
-package com.example.coba_group4;
+package com.example.coba_group4.occurence;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -6,7 +6,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.coba_group4.occurence.ReportOccurrence;
+import com.example.coba_group4.Emergency;
+import com.example.coba_group4.Forum;
+import com.example.coba_group4.ForumMessaging;
+import com.example.coba_group4.MainActivity;
+import com.example.coba_group4.Map;
+import com.example.coba_group4.ProfilePage;
+import com.example.coba_group4.R;
+import com.example.coba_group4.Search;
 
 public class OccurrenceData extends AppCompatActivity
 {

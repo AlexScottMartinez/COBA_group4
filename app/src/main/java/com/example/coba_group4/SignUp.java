@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.coba_group4.database.UsersDB;
+
 public class SignUp extends AppCompatActivity
 {
 
     Button SignUpBtn;
     EditText mName, mUsername, mEmail, mPassword;
-    Database db;
+    UsersDB userDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,7 +30,7 @@ public class SignUp extends AppCompatActivity
         mName = (EditText) findViewById(R.id.reg_name);
         mEmail = (EditText) findViewById(R.id.reg_email);
         SignUpBtn = (Button) findViewById(R.id.sign_up);
-        db = new Database(this);
+        userDb = new UsersDB();
 
         SignUpBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -61,10 +63,10 @@ public class SignUp extends AppCompatActivity
                     return;
                 }
                 else {
-                    Boolean checkUser = db.checkUsername(usernameValue);
+                    Boolean checkUser = userDb.checkUsername(usernameValue);
                     if (checkUser == false)
                     {
-                        Boolean insert = db.addOne(nameValue,usernameValue, emailValue, passwordValue);
+                        Boolean insert = userDb.addOne(nameValue,usernameValue, emailValue, passwordValue);
                         if (insert == true)
                         {
                             Toast.makeText(SignUp.this, "Sign up successful", Toast.LENGTH_SHORT).show();

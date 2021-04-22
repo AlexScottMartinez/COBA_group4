@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import com.example.coba_group4.occurence.OccurrenceData;
 import com.example.coba_group4.occurence.ReportOccurrence;
 
 public class Emergency extends AppCompatActivity {

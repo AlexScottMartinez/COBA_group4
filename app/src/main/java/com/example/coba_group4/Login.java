@@ -1,6 +1,5 @@
 package com.example.coba_group4;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,11 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coba_group4.database.Database;
+import com.example.coba_group4.database.UsersDB;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
-    EditText mUsername, mPassword;
-    Button loginBtn;
-    TextView msignUpLink;
-    Database db;
+    private EditText mUsername, mPassword;
+    private Button loginBtn;
+    private TextView msignUpLink;
+    private UsersDB usersDB;
+    private Database db;
 
 
     @Override
@@ -28,11 +31,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         mPassword = (EditText) findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login);
         msignUpLink = (TextView) findViewById(R.id.signUpLink);
-        db = new Database(this);
+        db = Database.getInstance(this);
+        usersDB = new UsersDB();
 
         loginBtn.setOnClickListener(this);
         msignUpLink.setOnClickListener(this);
-
+//        usersDB.addOne("asdf", "asdf", "asdf", "asdf");
     }
 
     @Override
@@ -62,7 +66,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
                 else
                 {
-                    Boolean checkUserPassword = db.checkUsernamePassword(usernameValue, passwordValue);
+                    Boolean checkUserPassword = usersDB.checkUsernamePassword(usernameValue, passwordValue);
                     if (checkUserPassword == true)
                     {
                         Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();

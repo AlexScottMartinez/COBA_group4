@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 
+import com.example.coba_group4.occurence.OccurrenceData;
 import com.example.coba_group4.occurence.ReportOccurrence;
 
 // Homepage

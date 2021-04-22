@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/add_occurence"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="351dp"
@@ -17,41 +17,120 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.187">
 
-        <EditText
-            android:id="@+id/report_address"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="@string/address"
-            android:inputType="textPostalAddress" />
+            android:weightSum="12">
 
-        <EditText
-            android:id="@+id/report_date"
+            <EditText
+                android:id="@+id/report_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/address"
+                android:inputType="textPostalAddress" />
+
+            <EditText
+                android:id="@+id/report_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="7"
+                android:autofillHints=""
+                android:hint="@string/city"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="@string/date"
-            android:inputType="date" />
+            android:weightSum="12">
 
-        <EditText
-            android:id="@+id/report_time"
+            <EditText
+                android:id="@+id/report_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/state"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/report_zip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="6"
+                android:ems="10"
+                android:hint="@string/zipCode"
+                android:inputType="numberSigned|phone"
+                android:autofillHints="" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="@string/time"
-            android:inputType="time" />
+            android:orientation="horizontal"
+            android:weightSum="12">
+            <EditText
+                android:id="@+id/report_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="@string/date"
+                android:inputType="none"
+                android:importantForAutofill="no" />
+            <Button
+                android:id="@+id/report_date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/pick_date"
+                android:onClick="showDatePickerDialog"
+                tools:ignore="OnClick" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="12">
+            <EditText
+                android:id="@+id/report_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:ems="10"
+                android:hint="@string/time"
+                android:inputType="none"
+                android:importantForAutofill="no"/>
+            <Button
+                android:id="@+id/report_time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_time"
+                android:layout_marginLeft="8dp"
+                android:onClick="showTimePickerDialog"
+                tools:ignore="OnClick" />
+        </LinearLayout>
         <Spinner
             android:id="@+id/event_type_dropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@android:drawable/btn_dropdown"
-            android:dropDownWidth="wrap_content"
-            android:prompt="@string/event_type"/>
+            android:dropDownWidth="wrap_content"/>
 
         <EditText
             android:id="@+id/report_description"
@@ -61,7 +140,8 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/description"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:importantForAutofill="no" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,11 +169,18 @@
                 android:layout_weight="6"
                 android:checkable="false"
                 android:clickable="true"
-                android:focusable="auto"
+                android:focusable="true"
                 android:onClick="onClick"
                 android:text="@string/report" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/report_error_text"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#980000" />
 
     </LinearLayout>
 

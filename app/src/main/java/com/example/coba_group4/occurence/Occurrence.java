@@ -4,12 +4,18 @@ import java.util.Date;
 
 public class Occurrence {
     String address;
+    String city;
+    String state;
+    int zipCode;
     String type;
     Date submittedTime;
     String description;
 
-    public Occurrence(String address, String type, Date submittedTime, String description) {
+    public Occurrence(String address, String city, String state, int zipCode, String type, Date submittedTime, String description) {
         this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
         this.type = type;
         this.submittedTime = submittedTime;
         this.description = description;
@@ -45,6 +51,30 @@ public class Occurrence {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 }
 
