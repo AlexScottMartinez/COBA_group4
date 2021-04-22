@@ -72,9 +72,4 @@ public class Occurrence {
     public int getZipCode() {
         return zipCode;
     }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
 }
-

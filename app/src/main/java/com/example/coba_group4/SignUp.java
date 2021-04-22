@@ -16,8 +16,8 @@ public class SignUp extends AppCompatActivity
 {
 
     Button SignUpBtn;
-    EditText mName, mUsername, mEmail, mPassword;
-    UsersDB userDb;
+    EditText fName, mName, lName, mUsername, mEmail, mPassword, mProfession, mIdnum;
+    UsersDB userDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,24 +27,37 @@ public class SignUp extends AppCompatActivity
 
         mUsername = (EditText) findViewById(R.id.reg_username);
         mPassword = (EditText) findViewById(R.id.reg_password);
-        mName = (EditText) findViewById(R.id.reg_name);
+        mName = (EditText) findViewById(R.id.reg_mname);
+        lName = (EditText) findViewById(R.id.reg_lname);
+        fName = (EditText) findViewById(R.id.reg_fname);
         mEmail = (EditText) findViewById(R.id.reg_email);
+        mProfession = (EditText) findViewById(R.id.reg_profession);
+        mIdnum = (EditText) findViewById(R.id.reg_idnum);
         SignUpBtn = (Button) findViewById(R.id.sign_up);
-        userDb = new UsersDB();
+        userDB = new UsersDB();
 
         SignUpBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                String fnameValue = fName.getText().toString().trim();
+                String mnameValue = mName.getText().toString().trim();
+                String lnameValue = lName.getText().toString().trim();
                 String usernameValue = mUsername.getText().toString().trim();
-                String passwordValue = mPassword.getText().toString().trim();
-                String nameValue = mName.getText().toString().trim();
                 String emailValue = mEmail.getText().toString().trim();
+                String passwordValue = mPassword.getText().toString().trim();
+                String professionValue = mProfession.getText().toString().trim();
+                String idnumValue = mIdnum.getText().toString().trim();
 
-                if (TextUtils.isEmpty(nameValue))
+                if (TextUtils.isEmpty(fnameValue))
                 {
-                    mName.setError("Name is required");
+                    mName.setError("First name is required");
+                    return;
+                }
+                if (TextUtils.isEmpty(lnameValue))
+                {
+                    lName.setError("Last name is required");
                     return;
                 }
                 if (TextUtils.isEmpty(usernameValue))
@@ -62,11 +75,27 @@ public class SignUp extends AppCompatActivity
                     mPassword.setError("Password is required");
                     return;
                 }
+                if (TextUtils.isEmpty(professionValue))
+                {
+                    mProfession.setError("Profession/Major is required");
+                    return;
+                }
+                if (TextUtils.isEmpty(idnumValue))
+                {
+                    mIdnum.setError("ID number is required");
+                    return;
+                }
+                Boolean checkIdnum = userDB.checkIdnum(idnumValue);
+                if (checkIdnum == false)
+                {
+                    mIdnum.setError("ID requires 10 digits");
+                    return;
+                }
                 else {
-                    Boolean checkUser = userDb.checkUsername(usernameValue);
+                    Boolean checkUser = userDB.checkUsername(usernameValue);
                     if (checkUser == false)
                     {
-                        Boolean insert = userDb.addOne(nameValue,usernameValue, emailValue, passwordValue);
+                        Boolean insert = userDB.addOne(fnameValue, mnameValue, lnameValue, usernameValue, emailValue, passwordValue, professionValue, idnumValue);
                         if (insert == true)
                         {
                             Toast.makeText(SignUp.this, "Sign up successful", Toast.LENGTH_SHORT).show();

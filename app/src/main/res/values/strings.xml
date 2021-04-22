@@ -3,6 +3,9 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="profile_page_fragment">Profile Page</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
@@ -28,4 +31,14 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="homepage">Homepage</string>
+    <string name="report_occurrence">Report Occurrence</string>
+    <string name="_911">911</string>
+    <string name="search">Search</string>
+    <string name="forums">Forums</string>
+    <string name="chat">Chat</string>
+    <string name="map">Map</string>
+    <string name="occurrence_data">Occurrence Data</string>
+    <string name="profile_page">Profile Page</string>
+    <string name="criminal_occurrence_reporting_app">Criminal Occurrence Reporting App</string>
 </resources>

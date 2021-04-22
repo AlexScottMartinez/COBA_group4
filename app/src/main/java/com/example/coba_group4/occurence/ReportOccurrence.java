@@ -29,11 +29,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ReportOccurrence extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class ReportOccurrence extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener
+{
 
     //Initialize variable
-    private  DatePicker dtPicker;
-    private  TimePicker tmPicker;
+    private DatePicker dtPicker;
+    private TimePicker tmPicker;
     private DrawerLayout drawerLayout;
     private Spinner eventTypeDropdown;
     private EditText address, city, state, zipCode, date, time, description;
@@ -85,8 +86,8 @@ public class ReportOccurrence extends AppCompatActivity implements DatePickerDia
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
-
     }
+
 
     public void onClick(View v)
     {
@@ -163,12 +164,10 @@ public class ReportOccurrence extends AppCompatActivity implements DatePickerDia
                         error = true;
                     }
                 }
-
                 if(error)
                 {
                     return;
                 }
-
 
                 Occurrence occurrence = new Occurrence(addressValue, cityValue, stateValue, Integer.parseInt(zipValue), eventTypeValue, parsedDate, descriptionValue);
                 Boolean added = occurrenceDB.addOne(occurrence);
