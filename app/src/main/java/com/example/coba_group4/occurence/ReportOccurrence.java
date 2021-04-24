@@ -182,7 +182,7 @@ public class ReportOccurrence extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        date.setText(month+"/"+dayOfMonth+"/"+year);
+        date.setText((month+1)+"/"+dayOfMonth+"/"+year);
         date.setError(null);
     }
 

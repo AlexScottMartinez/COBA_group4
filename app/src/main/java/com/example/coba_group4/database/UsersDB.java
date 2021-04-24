@@ -28,13 +28,11 @@ public class UsersDB {
         cv.put("idnum", idnum);
 
         long insert = db.insert("users", null, cv);
-        if (insert == 1)
+        if (insert > 0)
         {
-            return false;
-        }
-        else {
             return true;
         }
+        return false;
     }
 
     public Boolean checkUsername (String username)
