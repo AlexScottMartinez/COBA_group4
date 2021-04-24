@@ -41,4 +41,11 @@
     <string name="occurrence_data">Occurrence Data</string>
     <string name="profile_page">Profile Page</string>
     <string name="criminal_occurrence_reporting_app">Criminal Occurrence Reporting App</string>
+
+    <!-- Place Holder -->
+
+    <string name="exitbutton">Return</string>
+    <string name="crimetype">Crime Type</string>
+    <string name="todo">To Do</string>
+    <string name="location">Location</string>
 </resources>
