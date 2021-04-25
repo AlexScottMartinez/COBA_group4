@@ -1,7 +1,11 @@
 package com.example.coba_group4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -10,6 +14,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coba_group4.database.OccurrenceDB;
 import com.example.coba_group4.fragment.EmergencyFragment;
 import com.example.coba_group4.fragment.ForumFragment;
 import com.example.coba_group4.fragment.ForumMessagingFragment;
@@ -19,13 +24,20 @@ import com.example.coba_group4.fragment.OccurrenceDataFragment;
 import com.example.coba_group4.fragment.ProfilePageFragment;
 import com.example.coba_group4.fragment.SearchFragment;
 import com.example.coba_group4.fragment.ReportOccurrenceFragment;
+import com.example.coba_group4.occurence.Occurrence;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 // Homepage
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     //Initialize variable
     private DrawerLayout drawerLayout;
+    ListView occurrence_List;
+    OccurrenceDB occurrenceDB;
+    ArrayList<Occurrence> occurrences;
+    OccurrenceListAdapter occurrenceListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,6 +57,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        occurrence_List = findViewById(R.id.occurrence_list);
+        occurrenceDB = new OccurrenceDB();
+        occurrences = new ArrayList<>();
+        loadDataInList();
+
+    }
+
+    private void loadDataInList()
+    {
+        occurrences = occurrenceDB.getAllOccurrences();
+        occurrenceListAdapter = new OccurrenceListAdapter(this, occurrences);
+        occurrence_List.setAdapter(occurrenceListAdapter);
+        occurrenceListAdapter.notifyDataSetChanged();
     }
 
     @Override
