@@ -11,6 +11,7 @@ public class Occurrence {
     Date submittedTime;
     String description;
 
+    public Occurrence() {};
     public Occurrence(String address, String city, String state, int zipCode, String type, Date submittedTime, String description) {
         this.address = address;
         this.city = city;
@@ -71,5 +72,9 @@ public class Occurrence {
 
     public int getZipCode() {
         return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 }

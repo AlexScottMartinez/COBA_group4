@@ -22,7 +22,7 @@ public class Database extends SQLiteOpenHelper
 
     protected Database(@Nullable Context context)
     {
-        super(context, DBNAME, null, 1);
+        super(context, DBNAME, null, 4);
     }
 
 
@@ -33,7 +33,7 @@ public class Database extends SQLiteOpenHelper
         //String createTableStatement = "CREATE TABLE " + CUSTOMER_TABLE + " (" + COLUMN_ID + " INTERGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_CUSTOMER_NAME + " TEXT, " + COLUMN_CUSTOMER_USERNAME + " TEXT, " + COLUMN_CUSTOMER_EMAIL + " TEXT, " + COLUMN_CUSTOMER_PASSWORD + " TEXT)";
 
         db.execSQL("create Table users      (id INTEGER primary key autoincrement, fname TEXT, mname TEXT, lname TEXT, username TEXT, email TEXT, password TEXT, profession TEXT, idnum TEXT)");
-        db.execSQL("create Table occurrences (id INTEGER primary key, address TEXT, city TEXT, state TEXT, zip INTEGER, type TEXT, time INTEGER, description TEXT)");
+        db.execSQL("create Table occurrences (id INTEGER primary key autoincrement, address TEXT, city TEXT, state TEXT, zip INTEGER, type TEXT, time INTEGER, description TEXT)");
     }
     // This is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
@@ -41,6 +41,8 @@ public class Database extends SQLiteOpenHelper
     {
         db.execSQL("drop Table if exists users");
         db.execSQL("drop Table if exists occurrences");
+        db.execSQL("create Table users      (id INTEGER primary key autoincrement, fname TEXT, mname TEXT, lname TEXT, username TEXT, email TEXT, password TEXT, profession TEXT, idnum TEXT)");
+        db.execSQL("create Table occurrences (id INTEGER primary key autoincrement, address TEXT, city TEXT, state TEXT, zip INTEGER, type TEXT, time INTEGER, description TEXT)");
     }
 
 
