@@ -45,5 +45,12 @@ public class ProfilePage extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
+
+    }
+    @Override
+    public void onBackPressed()
+    {
+        finish();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }
