@@ -22,9 +22,8 @@
         <activity android:name=".occurence.ReportOccurrence" />
         <activity android:name=".Search" />
         <activity android:name=".Emergency" />
-        <activity android:name=".ProfilePage" />
+        <activity android:name=".profile_page.ProfilePage" />
         <activity android:name=".PinActivity" />
-
         <activity android:name=".SignUp" />
         <activity android:name=".Login"
             android:theme="@style/Theme.Design.NoActionBar">

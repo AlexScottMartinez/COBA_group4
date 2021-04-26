@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.coba_group4.ProfilePage;
+import com.example.coba_group4.profile_page.ProfilePage;
 import com.example.coba_group4.R;
 
 public class ProfilePageFragment extends Fragment
