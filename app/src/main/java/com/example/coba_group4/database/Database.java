@@ -22,7 +22,7 @@ public class Database extends SQLiteOpenHelper
 
     protected Database(@Nullable Context context)
     {
-        super(context, DBNAME, null, 4);
+        super(context, DBNAME, null, 5);
     }
 
 
@@ -34,6 +34,8 @@ public class Database extends SQLiteOpenHelper
 
         db.execSQL("create Table users      (id INTEGER primary key autoincrement, fname TEXT, mname TEXT, lname TEXT, username TEXT, email TEXT, password TEXT, profession TEXT, idnum TEXT)");
         db.execSQL("create Table occurrences (id INTEGER primary key autoincrement, address TEXT, city TEXT, state TEXT, zip INTEGER, type TEXT, time INTEGER, description TEXT)");
+        db.execSQL("create Table forums (id INTEGER primary key autoincrement, title TEXT, description TEXT, user TEXT, time INTEGER)");
+
     }
     // This is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
@@ -41,8 +43,12 @@ public class Database extends SQLiteOpenHelper
     {
         db.execSQL("drop Table if exists users");
         db.execSQL("drop Table if exists occurrences");
+        db.execSQL("drop Table if exists forums");
+
         db.execSQL("create Table users      (id INTEGER primary key autoincrement, fname TEXT, mname TEXT, lname TEXT, username TEXT, email TEXT, password TEXT, profession TEXT, idnum TEXT)");
         db.execSQL("create Table occurrences (id INTEGER primary key autoincrement, address TEXT, city TEXT, state TEXT, zip INTEGER, type TEXT, time INTEGER, description TEXT)");
+        db.execSQL("create Table forums (id INTEGER primary key autoincrement, title TEXT, description TEXT, user TEXT, time INTEGER)");
+
     }
 
 

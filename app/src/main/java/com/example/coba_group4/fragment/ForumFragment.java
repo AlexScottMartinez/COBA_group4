@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.coba_group4.Forum;
+import com.example.coba_group4.forum.Forum;
 import com.example.coba_group4.R;
+import com.example.coba_group4.forum.ForumActivity;
 
 public class ForumFragment extends Fragment
 {
@@ -19,7 +20,7 @@ public class ForumFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        Intent intent = new Intent(getActivity(), Forum.class);
+        Intent intent = new Intent(getActivity(), ForumActivity.class);
         startActivity(intent);
         return inflater.inflate(R.layout.activity_forum, container, false);
 

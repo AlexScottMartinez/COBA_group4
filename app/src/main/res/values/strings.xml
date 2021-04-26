@@ -43,9 +43,12 @@
     <string name="criminal_occurrence_reporting_app">Criminal Occurrence Reporting App</string>
 
     <!-- Place Holder -->
+    <string name="Create">Create</string>
+    <string name="Title">Title</string>
 
     <string name="exitbutton">Return</string>
     <string name="crimetype">Crime Type</string>
     <string name="todo">To Do</string>
     <string name="location">Location</string>
+    <string name="create_forum">Create Forum</string>
 </resources>

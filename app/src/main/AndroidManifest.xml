@@ -18,7 +18,8 @@
         <activity android:name=".occurence.OccurrenceData"/>
         <activity android:name=".Map"/>
         <activity android:name=".ForumMessaging" />
-        <activity android:name=".Forum" />
+        <activity android:name=".forum.ForumActivity" />
+        <activity android:name=".forum.CreateForum" />
         <activity android:name=".occurence.ReportOccurrence" />
         <activity android:name=".Search" />
         <activity android:name=".Emergency" />

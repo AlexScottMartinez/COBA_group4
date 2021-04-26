@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_occurence"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="351dp"
+        android:layout_height="587dp"
+        android:layout_margin="24dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_margin="8dp"
+            android:weightSum="12">
+
+            <EditText
+                android:id="@+id/Forum_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/Title"
+                android:inputType="textPostalAddress" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/forum_description"
+            android:layout_width="match_parent"
+            android:layout_height="440dp"
+            android:layout_margin="8dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/description"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="12">
+
+            <Button
+                android:id="@+id/cancel"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:clickable="false"
+                android:focusable="auto"
+                android:onClick="onClick"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/create"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:checkable="false"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onClick"
+                android:text="@string/Create" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/report_error_text"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#980000" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
