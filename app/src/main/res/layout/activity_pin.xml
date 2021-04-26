@@ -38,6 +38,7 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:background="#FF7878"
             android:text="@string/todo"
@@ -57,6 +58,8 @@
 
         <TextView
             android:id="@+id/textView5"
+            android:gravity="center"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#03A9F4"
@@ -78,6 +81,8 @@
         <TextView
             android:id="@+id/textView7"
             android:layout_width="match_parent"
+            android:gravity="center"
+
             android:layout_height="wrap_content"
             android:background="#CE75DD"
 
