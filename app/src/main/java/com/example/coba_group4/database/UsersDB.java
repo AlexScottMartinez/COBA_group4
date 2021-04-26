@@ -7,6 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 public class UsersDB {
 
     private Database database;
+    public static final String FNAME = "fname";
+    public static final String MNAME = "mname";
+    public static final String LNAME = "lname";
+    public static final String EMAIL = "email";
+    public static final String USERNAME = "username";
+    public static final String PROFESSION = "profession";
+    public static final String IDNUM = "idnum";
 
     public UsersDB()
     {
