@@ -6,7 +6,7 @@ Necessary Dependency:
 * Java sdk downloaded on your system.
 * Android Studio 
 
-Steps to run applicatio locally:
+Steps to run application locally:
 1. Make sure in the "Edit/Run Debug configurations" dropdown you choose "app" 
 2. Make sure the environment you are running in is "Pixel_3a_API_x86"
 3. Click on the build icon and wait for the build process to complete.
