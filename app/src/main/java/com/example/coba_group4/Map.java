@@ -71,7 +71,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 String markertitle = marker.getTitle();
                 Intent i = new Intent(Map.this, PinActivity.class);
-                i.putExtra("title", markertitle);
+                i.putExtra("title", occurrences.get(Integer.parseInt(markertitle)).getType());
                 i.putExtra("location",occurrences.get(Integer.parseInt(markertitle)).getAddress() + ", " + occurrences.get(Integer.parseInt(markertitle)).getCity() + ", " +
                         occurrences.get(Integer.parseInt(markertitle)).getState() );
                 i.putExtra("Time",occurrences.get(Integer.parseInt(markertitle)).getSubmittedTime()  );

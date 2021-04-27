@@ -37,10 +37,10 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:gravity="center"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:background="#FF7878"
+            android:gravity="center"
             android:text="@string/todo"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:text="XXXXX" />
@@ -58,11 +58,11 @@
 
         <TextView
             android:id="@+id/textView5"
-            android:gravity="center"
+            android:layout_width="385dp"
 
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#03A9F4"
+            android:gravity="center"
             android:text="@string/todo"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:text="XXXXXX" />
@@ -106,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="132dp"
             android:background="#EDE069"
+            android:gravity="center"
             android:text="@string/crimetype"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             tools:text="XXXXXX" />
