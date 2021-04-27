@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class OccurrenceDB {
@@ -47,7 +48,59 @@ public class OccurrenceDB {
     {
         SQLiteDatabase db = database.getReadableDatabase();
         ArrayList<Occurrence> occurrences = new ArrayList<>();
-        Cursor cursor = db.rawQuery("Select * from occurrences", new String[] {});
+        Cursor cursor = db.rawQuery("Select * from occurrences order by time desc", new String[] {});
+        if (cursor.getCount() > 0)
+        {
+            while (cursor.moveToNext()) {
+                Occurrence occurrence = new Occurrence();
+                occurrence.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                occurrence.setCity(cursor.getString(cursor.getColumnIndex("city")));
+                occurrence.setState(cursor.getString(cursor.getColumnIndex("state")));
+                occurrence.setZipCode(cursor.getInt(cursor.getColumnIndex("zip")));
+                occurrence.setType(cursor.getString(cursor.getColumnIndex("type")));
+                long dateTime = cursor.getLong(cursor.getColumnIndex("time"));
+                occurrence.setSubmittedTime(new Date(dateTime));
+                occurrence.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                occurrences.add(occurrence);
+            }
+        }
+        db.close();
+        return occurrences;
+    }
+
+    public ArrayList<Occurrence> getOccurrenceByAttributeAndTime(String attr, String value, long fromDate, long toDate)
+    {
+        SQLiteDatabase db = database.getReadableDatabase();
+        ArrayList<Occurrence> occurrences = new ArrayList<>();
+        String sql = "Select * from occurrences";
+        String where = "";
+        if(!(attr == null))
+        {
+            where += " where "+ attr + " = ?";
+        }
+        if(fromDate > 0){
+            if(where.equals(""))
+            {
+                where += " where ";
+            }
+            else
+            {
+                where += " and ";
+            }
+            where += "time > " + fromDate;
+        }
+        if(toDate > 0){
+            if(where.equals(""))
+            {
+                where += " where ";
+            }
+            else
+            {
+                where += " and ";
+            }
+            where += "time < " + toDate;
+        }
+        Cursor cursor = db.rawQuery(sql+where, new String[] {value});
         if (cursor.getCount() > 0)
         {
             while (cursor.moveToNext()) {

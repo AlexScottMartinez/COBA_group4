@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 import com.example.coba_group4.occurence.Occurrence;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class OccurrenceListAdapter extends BaseAdapter
 {
@@ -20,6 +24,20 @@ public class OccurrenceListAdapter extends BaseAdapter
     {
         this.context = context;
         this.occurrenceList = occurrenceList;
+    }
+
+    public String createAddressString(Occurrence occurrence)
+    {
+        return occurrence.getAddress() +", "
+                + occurrence.getCity() +", "
+                + occurrence.getState()+", "
+                + occurrence.getZipCode();
+    }
+
+    public String createDateString(Date date)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+        return simpleDateFormat.format(date);
     }
 
     @Override
@@ -43,21 +61,17 @@ public class OccurrenceListAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_occurrences, null);
-            TextView type = (TextView)convertView.findViewById(R.id.type);
-            TextView time = (TextView)convertView.findViewById(R.id.time);
-            TextView address = (TextView)convertView.findViewById(R.id.address);
-            TextView city = (TextView)convertView.findViewById(R.id.city);
-            TextView zip = (TextView)convertView.findViewById(R.id.zip);
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflater.inflate(R.layout.list_occurrences, null);
+        TextView type = (TextView)convertView.findViewById(R.id.type);
+        TextView time = (TextView)convertView.findViewById(R.id.time);
+        TextView address = (TextView)convertView.findViewById(R.id.address);
 
-           Occurrence occurrence = occurrenceList.get(position);
+        Occurrence occurrence = occurrenceList.get(position);
 
-           type.setText(occurrence.getType());
-           time.setText(String.valueOf(occurrence.getSubmittedTime()));
-           address.setText(occurrence.getAddress());
-           city.setText(occurrence.getCity());
-           zip.setText(String.valueOf(occurrence.getZipCode()));
+        type.setText(occurrence.getType());
+        time.setText(createDateString(occurrence.getSubmittedTime()));
+        address.setText(createAddressString(occurrence));
 
         return convertView;
     }

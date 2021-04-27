@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="false"
+    android:onClick="onClick"
     tools:context=".occurence.OccurrenceData">
 
     <LinearLayout
@@ -11,8 +12,102 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="197dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="187dp"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="12">
+
+                    <Spinner
+                        android:id="@+id/attr_dropdown"
+                        android:layout_width="233dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="6"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:dropDownWidth="wrap_content"
+                        tools:layout_weight="6" />
+
+                    <EditText
+                        android:id="@+id/attr_text_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="6"
+                        android:ems="10"
+                        android:hint="Search Attribute"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        tools:layout_weight="6" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="12">
+
+                    <Button
+                        android:id="@+id/from_date_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="From Date"
+                        tools:layout_weight="6" />
+
+                    <Button
+                        android:id="@+id/to_date_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="6"
+                        android:text="To Date" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:text="@string/search" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/occurrence_graph"/>
     </LinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical">-->
+
+
+    <!--        <FrameLayout-->
+    <!--            android:id="@+id/occurrence_data_frame"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent">-->
+
+    <!--            <ListView-->
+    <!--                android:id="@+id/occurrence_list"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent" />-->
+    <!--        </FrameLayout>-->
+
+    <!--    </LinearLayout>-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

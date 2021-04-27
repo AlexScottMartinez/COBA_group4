@@ -94,7 +94,7 @@ public class ReportOccurrence extends AppCompatActivity implements DatePickerDia
         switch (v.getId())
         {
             case R.id.cancel_report:
-
+                finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                 break;
@@ -198,5 +198,11 @@ public class ReportOccurrence extends AppCompatActivity implements DatePickerDia
         }
         time.setText(hourOfDay+":"+min+end);
         time.setError(null);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }
